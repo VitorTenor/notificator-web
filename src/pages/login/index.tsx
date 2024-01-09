@@ -1,5 +1,5 @@
 import {ReactElement} from "react";
-import {LoginPage} from "@/components/view/Login";
+import {LoginPage} from "@/components/organism/Login";
 
 
 const Login = () : ReactElement => {

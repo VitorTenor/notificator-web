@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {RegisterForm} from "@/components/molecule/RegisterForm";
 import {ReactElement} from "react";
-import {useContainer, UseRegisterContainer} from "@/components/view/Register/container";
+import {useContainer, UseRegisterContainer} from "@/components/organism/Register/container";
 
 
 const RegisterPage = () : ReactElement => {

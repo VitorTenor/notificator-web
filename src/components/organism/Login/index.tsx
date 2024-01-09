@@ -8,8 +8,8 @@ import Avatar from "@mui/material/Avatar";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { LoginForm } from "@/components/molecule/LoginForm";
-import {useContainer, UseLoginContainer} from "@/components/view/Login/container";
-import {FormStyle} from "@/components/view/Login/styles";
+import {useContainer, UseLoginContainer} from "@/components/organism/Login/container";
+import {FormStyle} from "@/components/organism/Login/styles";
 
 export const LoginPage = () : ReactElement => {
     const { functions } : UseLoginContainer = useContainer();
