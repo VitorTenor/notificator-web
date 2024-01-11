@@ -1,16 +1,18 @@
 import {createContext, useState} from "react";
 import {ToastProps, ToastType} from "@/components/atom/Toast";
 import {useRouter} from "next/router";
-import {User} from "@/constants/interface";
+import {AuthUser} from "@/constants/interface";
+import decodeToken, {saveToken} from "@/util/jwtUtil";
+import {KEY} from "@/constants/localStorageKey";
 
 export type AuthContextType = {
     toastData: ToastProps;
     showToast: (toastData: ToastProps) => void;
     redirect(uri: string): void;
-    user(): User;
+    user(): AuthUser;
     isLoading: boolean;
     setIsLoading(isLoading: boolean): void;
-    saveUser(user: User): void;
+    saveUser(user: AuthUser): void;
 }
 
 
@@ -18,14 +20,14 @@ export const AuthContext= createContext<AuthContextType>({
     toastData: {open: false, message: ''},
     showToast: (toastData: ToastProps) : void => {},
     redirect: (uri: string) : void => {},
-    user: () : User => {
+    user: () : AuthUser => {
         return {
             token: '',
         }
     },
     isLoading: false,
     setIsLoading: (isLoading: boolean) : void => {},
-    saveUser: (user: User) : void => {}
+    saveUser: (user: AuthUser) : void => {}
 } as AuthContextType);
 
 
@@ -48,16 +50,16 @@ export const AuthContextProvider = ({children}) => {
         router.push(uri);
     }
 
-    const saveUser = (user: User) : void => {
-        localStorage.setItem('user', JSON.stringify(user));
+    const saveUser = (user: AuthUser) : void => {
+        saveToken(user.token);
     }
 
-    const user = () : User => {
-        const user : string = localStorage.getItem('user') ;
-        console.log(user)
-        console.log("user")
-        if (user !== '') {
-            return JSON.parse(user);
+    const user = () : AuthUser => {
+        const token : string = localStorage.getItem(KEY.TOKEN) ;
+        if (token !== '') {
+            return {
+                token: token,
+            }
         }
     }
 
